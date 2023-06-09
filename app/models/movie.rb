@@ -1,4 +1,4 @@
 class Movie < ActiveRecord::Base
-    has_
+    has_many
     
 end
