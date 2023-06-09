@@ -1,4 +1,4 @@
 class Movie < ActiveRecord::Base
-    ha
+    has
     
 end
