@@ -6,6 +6,9 @@ class ApplicationController < Sinatra::Base
 
   end
 
+  get '/movies/:id' do
+   Movie.find(params[:id])
+  end
   post '/movies' do
    movie=Movie.create(params)
    if movie.save
@@ -36,12 +39,17 @@ delete '/movies/reviews'do
 Review.destroy_all
 end
 
+get '/reviews' do
+Review.all.to_json
+end
   post '/movies/:id/reviews' do
    movie=Movie.find(params[:id])
    review=movie.reviews.build(params)
    if review.save
-    status 200
+    status 201
+    {review:review}.to_json
     else status 400
+      {error:"Failed to save review"}.to_json
    end
   end
 end
