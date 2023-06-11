@@ -35,8 +35,9 @@ delete '/movies'do
 Movie.destroy_all
 end
 
-delete '/movies/reviews'do
-Review.destroy_all
+delete "/reviews/:id"do
+
+Review.find(params[:id].destroy)
 end
 
 get '/reviews' do
@@ -44,7 +45,7 @@ Review.all.to_json
 end
   post '/movies/:id/reviews' do
    movie=Movie.find(params[:id])
-   review=movie.reviews.build(params)
+   review=movie.reviews.build(content:params[:review])
    if review.save
     status 201
     {review:review}.to_json
